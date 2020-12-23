@@ -27,14 +27,16 @@ export default function Login() {
                         setpassword1(e.currentTarget.value)}}/>
                 </Form.Group>
                 
-                <Button variant="primary" type="submit" onClick={()=> {localStorage.getItem('username')===username1 ? (
+                <div className="text-center">
+                <Button  variant="primary" type="submit" onClick={()=> {localStorage.getItem('username')===username1 ? (
                     localStorage.getItem('password')===password1 ? (
                     setstatement("log in success") ):setstatement("Pasword and Username doesn't match")) :
                     setstatement("Login faild");setvisibility(true) ;setusername1(''); setpassword1('')}}>
                 Log In
                 </Button>
+                </div>
 
-                <div>
+                <div className="text-center">
                     {visibility ? <p value={statement} >{statement}</p> : null}
                 </div>
             </Form>
