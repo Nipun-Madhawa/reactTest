@@ -1,6 +1,11 @@
 import React, { useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+
 
 export default function Login() {
     const [statement, setstatement] = useState("");
@@ -9,6 +14,13 @@ export default function Login() {
     const [password1, setpassword1] = useState("");
     return (
         <div>
+            <Container>
+      <Card style={{boxShadow: "1px 1px 10px 1px #DDDD"}}>
+  
+        <Card.Body>
+        <Row>
+           <Col>
+
             <Form onSubmit={(e) => {
                 e.preventDefault();
             }}>
@@ -41,7 +53,14 @@ export default function Login() {
                 </div>
             </Form>
 
-                               
+            </Col>
+        </Row>
+          
+        </Card.Body>
+      </Card>
+
+      
+      </Container>                      
         </div>
     )
 }

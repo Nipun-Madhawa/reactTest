@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import axios from 'axios';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+
 
 
 export default function Signup() {
+    const [firstname, setfirstname] = useState("");
+    const [lastname, setlastname] = useState("");
+    const [companyname, setcompanyname] = useState("");
+    const [phone, setphone] = useState("");
+    const [country, setcountry] = useState("");
     const [username, setusername] = useState("");
     const [password, setpassword] = useState("");
-    const [country, setcountry] = useState([]);
+    const [countries, setcountries] = useState([]);
+
 
 useEffect(() => {
 
     const fetchData = async () => {
         const result = await axios(
-            'https://restcountries.eu/rest/v2/all',
+            'https://restcountries.eu/rest/v2/all?fields=name',
         );
    
-        setcountry(result.data);
+        setcountries(result.data);
        
       };
    
@@ -31,6 +41,14 @@ useEffect(() => {
 
     return (
         <div>
+            <Container>
+      <Card style={{boxShadow: "1px 1px 10px 1px #DDDD"}}>
+  
+        <Card.Body>
+        
+        <Row>
+          <Col>
+
             <Form onSubmit={(e) => {
                 e.preventDefault();
             }}>
@@ -38,33 +56,42 @@ useEffect(() => {
             <Form.Row>
                 <Col>
                 <Form.Label>First name </Form.Label>
-                <Form.Control placeholder="First name" />
+                <Form.Control placeholder="First name" onChange={(e) => {
+                    setfirstname(e.currentTarget.value)
+                }} />
                 </Col>
                 <Col>
                 <Form.Label>Last name </Form.Label>
-                <Form.Control placeholder="Last name" />
+                <Form.Control placeholder="Last name" onChange={(e) => {
+                    setlastname(e.currentTarget.value)
+                }} />
                 </Col>
             </Form.Row> 
                 </Form.Group>    
             
                 <Form.Group >
                 <Form.Label>Company name </Form.Label>
-                <Form.Control placeholder="Company name" />
+                <Form.Control placeholder="Company name" onChange={(e) => {
+                    setcompanyname(e.currentTarget.value)
+                }}/>
                 </Form.Group>
                 <Form.Group >
             <Form.Row>
                 <Col>
                 <Form.Label>Phone number </Form.Label>
-                <Form.Control placeholder="Phone number" />
+                <Form.Control placeholder="Phone number" onChange={(e) => {
+                    setphone(e.currentTarget.value)
+                }}/>
                 </Col>
                 <Col>
                 <Form.Label>Country </Form.Label>
                 
                 <Typeahead
-                  
-                   options={country}
-                  
-                    placeholder="Choose a country...">
+                   labelKey={"name"}
+                   options={countries}
+                   onChange={setcountry}
+                    selected={country}
+                    placeholder="Choose your country...">
                     
                 </Typeahead>
 
@@ -100,7 +127,12 @@ useEffect(() => {
                 </div>
             </Form>
 
-                                    
+            </Col>
+        </Row>
+          
+        </Card.Body>
+      </Card>
+      </Container>                          
         </div>
     )
 }
