@@ -8,6 +8,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import { useMediaQuery } from 'react-responsive'
 
 
 
@@ -21,6 +22,14 @@ export default function Signup() {
     const [password, setpassword] = useState("");
     const [countries, setcountries] = useState([]);
 
+    const Mobile = ({ children }) => {
+        const isMobile = useMediaQuery({ maxWidth: 767 })
+        return isMobile ? children : null
+      }
+      const Default = ({ children }) => {
+        const isNotMobile = useMediaQuery({ minWidth: 768 })
+        return isNotMobile ? children : null
+      }  
 
 useEffect(() => {
 
@@ -49,10 +58,11 @@ useEffect(() => {
         <Row>
           <Col>
 
-            <Form   method='post' onSubmit={(e) => {
+            <Form   onSubmit={(e) => {
                 e.preventDefault();
             }}>
             <Form.Group >
+            <Default>
             <Form.Row>
                 <Col>
                 <Form.Label>First name </Form.Label>
@@ -67,6 +77,22 @@ useEffect(() => {
                 }} />
                 </Col>
             </Form.Row> 
+            </Default>
+            <Mobile>
+            <Form.Group >
+                <Form.Label>First name </Form.Label>
+                <Form.Control name='firstname' placeholder="First name" onChange={(e) => {
+                    setfirstname(e.currentTarget.value)
+                }} />
+            </Form.Group> 
+            <Form.Group >   
+                
+                <Form.Label>Last name </Form.Label>
+                <Form.Control name='lastname' placeholder="Last name" onChange={(e) => {
+                    setlastname(e.currentTarget.value)
+                }} />
+                </Form.Group>
+            </Mobile>
                 </Form.Group>    
             
                 <Form.Group >
@@ -75,7 +101,8 @@ useEffect(() => {
                     setcompanyname(e.currentTarget.value)
                 }}/>
                 </Form.Group>
-                <Form.Group >
+            <Form.Group >
+            <Default>
             <Form.Row>
                 <Col>
                 <Form.Label>Phone number </Form.Label>
@@ -98,13 +125,34 @@ useEffect(() => {
                  
                 </Col>
             </Form.Row> 
+            </Default>
+            <Mobile>
+                <Form.Group>
+                <Form.Label>Phone number </Form.Label>
+                <Form.Control name='phone' placeholder="Phone number" onChange={(e) => {
+                    setphone(e.currentTarget.value)
+                }}/>
+                </Form.Group> 
+                <Form.Group>
+                <Form.Label>Country </Form.Label>
+                
+                <Typeahead name='country'
+                   labelKey={"name"}
+                   options={countries}
+                   onChange={setcountry}
+                    selected={country}
+                    placeholder="Choose your country...">
+                    
+                </Typeahead>
                 </Form.Group>
+            </Mobile>
+            </Form.Group>
                 
             
 
             <Form.Group controlId="formBasicEmail">
-                    <Form.Label>UserName </Form.Label>
-                    <Form.Control name='username'  placeholder={"UserName"} value={username} onChange={(e) => {
+                    <Form.Label>User Name </Form.Label>
+                    <Form.Control name='username'  placeholder={"User Name"} value={username} onChange={(e) => {
                         setusername(e.currentTarget.value)}} />
                     <Form.Text className="text-muted">
                     

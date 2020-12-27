@@ -12,6 +12,9 @@ export default function Login() {
     const [visibility, setvisibility] = useState(false);
     const [username1, setusername1] = useState("");
     const [password1, setpassword1] = useState("");
+
+    
+
     return (
         <div>
             <Container>
@@ -25,8 +28,8 @@ export default function Login() {
                 e.preventDefault();
             }}>
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>UserName </Form.Label>
-                    <Form.Control name='username'  placeholder={"UserName"} value={username1} onChange={(e) => {
+                    <Form.Label>User Name </Form.Label>
+                    <Form.Control name='username'  placeholder={"User Name"} value={username1} onChange={(e) => {
                         setusername1(e.currentTarget.value)}} />
                     <Form.Text className="text-muted">
                     
