@@ -21,12 +21,12 @@ export default function Login() {
         <Row>
            <Col>
 
-            <Form onSubmit={(e) => {
+            <Form   onSubmit={(e) => {
                 e.preventDefault();
             }}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>UserName </Form.Label>
-                    <Form.Control type="email" placeholder={"UserName"} value={username1} onChange={(e) => {
+                    <Form.Control name='username'  placeholder={"UserName"} value={username1} onChange={(e) => {
                         setusername1(e.currentTarget.value)}} />
                     <Form.Text className="text-muted">
                     
@@ -35,7 +35,7 @@ export default function Login() {
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" value={password1} onChange={(e) => {
+                    <Form.Control name='password' type="password" placeholder="Password" value={password1} onChange={(e) => {
                         setpassword1(e.currentTarget.value)}}/>
                 </Form.Group>
                 
@@ -43,7 +43,7 @@ export default function Login() {
                 <Button  variant="primary" type="submit" onClick={()=> {localStorage.getItem('username')===username1 ? (
                     localStorage.getItem('password')===password1 ? (
                     setstatement("log in success") ):setstatement("Pasword and Username doesn't match")) :
-                    setstatement("Login faild");setvisibility(true) ;setusername1(''); setpassword1('')}}>
+                    setstatement("Login faild");setvisibility(true) ;}}>
                 Log In
                 </Button>
                 </div>

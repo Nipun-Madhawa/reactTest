@@ -49,20 +49,20 @@ useEffect(() => {
         <Row>
           <Col>
 
-            <Form onSubmit={(e) => {
+            <Form   method='post' onSubmit={(e) => {
                 e.preventDefault();
             }}>
             <Form.Group >
             <Form.Row>
                 <Col>
                 <Form.Label>First name </Form.Label>
-                <Form.Control placeholder="First name" onChange={(e) => {
+                <Form.Control name='firstname' placeholder="First name" onChange={(e) => {
                     setfirstname(e.currentTarget.value)
                 }} />
                 </Col>
                 <Col>
                 <Form.Label>Last name </Form.Label>
-                <Form.Control placeholder="Last name" onChange={(e) => {
+                <Form.Control name='lastname' placeholder="Last name" onChange={(e) => {
                     setlastname(e.currentTarget.value)
                 }} />
                 </Col>
@@ -71,7 +71,7 @@ useEffect(() => {
             
                 <Form.Group >
                 <Form.Label>Company name </Form.Label>
-                <Form.Control placeholder="Company name" onChange={(e) => {
+                <Form.Control name='companyname' placeholder="Company name" onChange={(e) => {
                     setcompanyname(e.currentTarget.value)
                 }}/>
                 </Form.Group>
@@ -79,14 +79,14 @@ useEffect(() => {
             <Form.Row>
                 <Col>
                 <Form.Label>Phone number </Form.Label>
-                <Form.Control placeholder="Phone number" onChange={(e) => {
+                <Form.Control name='phone' placeholder="Phone number" onChange={(e) => {
                     setphone(e.currentTarget.value)
                 }}/>
                 </Col>
                 <Col>
                 <Form.Label>Country </Form.Label>
                 
-                <Typeahead
+                <Typeahead name='country'
                    labelKey={"name"}
                    options={countries}
                    onChange={setcountry}
@@ -104,7 +104,7 @@ useEffect(() => {
 
             <Form.Group controlId="formBasicEmail">
                     <Form.Label>UserName </Form.Label>
-                    <Form.Control type="email" placeholder={"UserName"} value={username} onChange={(e) => {
+                    <Form.Control name='username'  placeholder={"UserName"} value={username} onChange={(e) => {
                         setusername(e.currentTarget.value)}} />
                     <Form.Text className="text-muted">
                     
@@ -113,15 +113,14 @@ useEffect(() => {
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="password" placeholder="Password" value={password} onChange={(e) => {
+                    <Form.Control name='password' type="password" placeholder="Password" value={password} onChange={(e) => {
                         setpassword(e.currentTarget.value)}}/>
                 </Form.Group>
   
                 <div className="text-center">
                 <Button  variant="primary" type="submit" onClick={()=> {localStorage.setItem('username',username);
                                                     localStorage.setItem('password',password);
-                                                    setusername('');
-                                                    setpassword('');}}>
+                                                    }}>
                     Sign Up
                 </Button>
                 </div>
