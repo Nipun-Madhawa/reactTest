@@ -18,18 +18,20 @@ export default function Signup() {
     const [companyname, setcompanyname] = useState("");
     const [phone, setphone] = useState("");
     const [country, setcountry] = useState("");
-    const [username, setusername] = useState("");
+    const [email, setemail] = useState("");
     const [password, setpassword] = useState("");
     const [countries, setcountries] = useState([]);
+    const [passwordval, setpasswordval] = useState(false)
+    
+    const isDefault = useMediaQuery({
+        minWidth: 768
+      })
 
-    const Mobile = ({ children }) => {
-        const isMobile = useMediaQuery({ maxWidth: 767 })
-        return isMobile ? children : null
-      }
-      const Default = ({ children }) => {
-        const isNotMobile = useMediaQuery({ minWidth: 768 })
-        return isNotMobile ? children : null
-      }  
+      const isMobile = useMediaQuery({
+        maxWidth: 768
+      })  
+
+      
 
 useEffect(() => {
 
@@ -48,6 +50,13 @@ useEffect(() => {
     
 }, [])    ;
 
+useEffect(() => {
+    if(password.length>7){setpasswordval(true);}
+    else{setpasswordval(false);}
+}, [password])
+
+
+
     return (
         <div>
             <Container>
@@ -62,53 +71,57 @@ useEffect(() => {
                 e.preventDefault();
             }}>
             <Form.Group >
-            <Default>
+            {isDefault && 
             <Form.Row>
                 <Col>
                 <Form.Label>First name </Form.Label>
-                <Form.Control name='firstname' placeholder="First name" onChange={(e) => {
+                <Form.Control  name='firstname' placeholder="First name" onChange={(e) => {
                     setfirstname(e.currentTarget.value)
-                }} />
+                }} required/>
                 </Col>
                 <Col>
                 <Form.Label>Last name </Form.Label>
                 <Form.Control name='lastname' placeholder="Last name" onChange={(e) => {
                     setlastname(e.currentTarget.value)
-                }} />
+                }} required/>
                 </Col>
             </Form.Row> 
-            </Default>
-            <Mobile>
+            }
+            
+            {isMobile && 
+            <>
             <Form.Group >
                 <Form.Label>First name </Form.Label>
-                <Form.Control name='firstname' placeholder="First name" onChange={(e) => {
+                <Form.Control  name='firstname' placeholder="First name" onChange={(e) => {
                     setfirstname(e.currentTarget.value)
-                }} />
+                }} required/>
             </Form.Group> 
             <Form.Group >   
                 
                 <Form.Label>Last name </Form.Label>
                 <Form.Control name='lastname' placeholder="Last name" onChange={(e) => {
                     setlastname(e.currentTarget.value)
-                }} />
+                }} required/>
                 </Form.Group>
-            </Mobile>
+                </>
+            }
+            
                 </Form.Group>    
             
                 <Form.Group >
                 <Form.Label>Company name </Form.Label>
-                <Form.Control name='companyname' placeholder="Company name" onChange={(e) => {
+                <Form.Control  name='companyname' placeholder="Company name" onChange={(e) => {
                     setcompanyname(e.currentTarget.value)
-                }}/>
+                }} required/>
                 </Form.Group>
             <Form.Group >
-            <Default>
+            {isDefault && 
             <Form.Row>
                 <Col>
                 <Form.Label>Phone number </Form.Label>
                 <Form.Control name='phone' placeholder="Phone number" onChange={(e) => {
                     setphone(e.currentTarget.value)
-                }}/>
+                }} required/>
                 </Col>
                 <Col>
                 <Form.Label>Country </Form.Label>
@@ -118,20 +131,20 @@ useEffect(() => {
                    options={countries}
                    onChange={setcountry}
                     selected={country}
-                    placeholder="Choose your country...">
+                    placeholder="Choose your country..." required>
                     
                 </Typeahead>
 
                  
                 </Col>
             </Form.Row> 
-            </Default>
-            <Mobile>
+            }
+            {isMobile && <>
                 <Form.Group>
                 <Form.Label>Phone number </Form.Label>
                 <Form.Control name='phone' placeholder="Phone number" onChange={(e) => {
                     setphone(e.currentTarget.value)
-                }}/>
+                }} required/>
                 </Form.Group> 
                 <Form.Group>
                 <Form.Label>Country </Form.Label>
@@ -141,34 +154,36 @@ useEffect(() => {
                    options={countries}
                    onChange={setcountry}
                     selected={country}
-                    placeholder="Choose your country...">
+                    placeholder="Choose your country..." required>
                     
                 </Typeahead>
                 </Form.Group>
-            </Mobile>
+            </>}
             </Form.Group>
                 
             
 
             <Form.Group controlId="formBasicEmail">
-                    <Form.Label>User Name </Form.Label>
-                    <Form.Control name='username'  placeholder={"User Name"} value={username} onChange={(e) => {
-                        setusername(e.currentTarget.value)}} />
-                    <Form.Text className="text-muted">
-                    
-                    </Form.Text>
+                    <Form.Label>Email </Form.Label>
+                    <Form.Control type='email' name='email'  placeholder={"Email"} value={email} onChange={(e) => {
+                        setemail(e.currentTarget.value);}}  required/>
+                        
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control name='password' type="password" placeholder="Password" value={password} onChange={(e) => {
-                        setpassword(e.currentTarget.value)}}/>
+                    <Form.Control id="inputPassword6" name='password' type="password" placeholder="Password" value={password} onChange={(e) => {
+                        setpassword(e.currentTarget.value);}} required/>
+                        {!passwordval ?<Form.Text id="passwordHelpBlock" muted>
+                            Must be 8-20 characters long.
+                            </Form.Text>:null}
+                        
                 </Form.Group>
   
                 <div className="text-center">
-                <Button  variant="primary" type="submit" onClick={()=> {localStorage.setItem('username',username);
+                <Button  variant="primary" type="submit" onClick={()=> {localStorage.setItem('username',email);
                                                     localStorage.setItem('password',password);
-                                                    }}>
+                                                    }} disabled={!passwordval}>
                     Sign Up
                 </Button>
                 </div>

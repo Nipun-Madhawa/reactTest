@@ -10,8 +10,8 @@ import Card from 'react-bootstrap/Card';
 export default function Login() {
     const [statement, setstatement] = useState("");
     const [visibility, setvisibility] = useState(false);
-    const [username1, setusername1] = useState("");
-    const [password1, setpassword1] = useState("");
+    const [email, setemail] = useState("");
+    const [password, setpassword] = useState("");
 
     
 
@@ -28,9 +28,9 @@ export default function Login() {
                 e.preventDefault();
             }}>
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>User Name </Form.Label>
-                    <Form.Control name='username'  placeholder={"User Name"} value={username1} onChange={(e) => {
-                        setusername1(e.currentTarget.value)}} />
+                    <Form.Label>Email </Form.Label>
+                    <Form.Control name='email'  placeholder={"Email"} value={email} onChange={(e) => {
+                        setemail(e.currentTarget.value)}} required/>
                     <Form.Text className="text-muted">
                     
                     </Form.Text>
@@ -38,13 +38,13 @@ export default function Login() {
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control name='password' type="password" placeholder="Password" value={password1} onChange={(e) => {
-                        setpassword1(e.currentTarget.value)}}/>
+                    <Form.Control name='password' type="password" placeholder="Password" value={password} onChange={(e) => {
+                        setpassword(e.currentTarget.value)}} required/>
                 </Form.Group>
                 
                 <div className="text-center">
-                <Button  variant="primary" type="submit" onClick={()=> {localStorage.getItem('username')===username1 ? (
-                    localStorage.getItem('password')===password1 ? (
+                <Button  variant="primary" type="submit" onClick={()=> {localStorage.getItem('username')===email ? (
+                    localStorage.getItem('password')===password ? (
                     setstatement("log in success") ):setstatement("Pasword and Username doesn't match")) :
                     setstatement("Login faild");setvisibility(true) ;}}>
                 Log In
