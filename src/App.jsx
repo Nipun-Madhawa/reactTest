@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import Nav from 'react-bootstrap/Nav'
 import Container from 'react-bootstrap/Container';
+import ForgotPassword from './features/signup/ForgotPassword';
 
 
 function App() {
@@ -33,11 +34,15 @@ function App() {
           Counter
           </Nav.Link>
         </Nav.Item>
+        
       </Nav>
       </Container>
       <br></br>
         
         <Switch>
+        <Route path="/forgotPassword">
+                            <ForgotPassword />
+                        </Route>
           <Route path="/counter">
             <Counter />
           </Route>

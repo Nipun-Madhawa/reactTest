@@ -60,7 +60,7 @@ useEffect(() => {
     return (
         <div>
             <Container>
-      <Card style={{boxShadow: "1px 1px 10px 1px #DDDD"}}>
+      <Card className="signup" style={{boxShadow: "1px 1px 10px 1px #DDDD"}}>
   
         <Card.Body>
         

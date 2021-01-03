@@ -5,6 +5,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
+import ForgotPassword from './ForgotPassword';
+import { Link, Router,Route } from 'react-router-dom';
 
 
 export default function Login() {
@@ -16,9 +18,13 @@ export default function Login() {
     
 
     return (
+        
         <div>
+            
+            
+            
             <Container>
-      <Card style={{boxShadow: "1px 1px 10px 1px #DDDD"}}>
+      <Card className="login" style={{boxShadow: "1px 1px 10px 1px #DDDD"}}>
   
         <Card.Body>
         <Row>
@@ -40,6 +46,11 @@ export default function Login() {
                     <Form.Label>Password</Form.Label>
                     <Form.Control name='password' type="password" placeholder="Password" value={password} onChange={(e) => {
                         setpassword(e.currentTarget.value)}} required/>
+                        <Form.Text className="text-muted">
+                            
+                        <Link to="/forgotPassword">
+                                Forgot password?</Link>
+                                </Form.Text>
                 </Form.Group>
                 
                 <div className="text-center">
